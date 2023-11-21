@@ -1,5 +1,9 @@
 package com.mysite.sbb;
 
+import com.mysite.sbb.domain.answer.answer.entity.Answer;
+import com.mysite.sbb.domain.answer.answer.repository.AnswerRepository;
+import com.mysite.sbb.domain.question.question.entitiy.Question;
+import com.mysite.sbb.domain.question.question.repository.QuestionRepository;
 import jakarta.transaction.Transactional;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
