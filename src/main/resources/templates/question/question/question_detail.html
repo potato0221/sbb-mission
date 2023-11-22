@@ -29,7 +29,10 @@
     <!-- 답변 반복 끝  -->
     <!-- 답변 작성 -->
 
-    <form th:action="@{|/answer/create/${question.id}|}" method="post" class="my-3">
+    <form th:action="@{|/answer/create/${question.id}|}" th:object="${answerForm}" method="post" class="my-3">
+        <div class="alert alert-error" role="alert" th:if="${#fields.hasAnyErrors()}">
+            <div th:each="err : ${#fields.allErrors()}" th:text="${err}" />
+        </div>
         <div class="flex justify-between items-center">
             <textarea name="content" id="content" rows="5" class="form-textarea focus:outline-gray-400 mx-3 w-full"></textarea>
         </div>
