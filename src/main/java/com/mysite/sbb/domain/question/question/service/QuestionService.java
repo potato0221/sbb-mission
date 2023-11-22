@@ -27,11 +27,11 @@ public class QuestionService {
             throw new DataNotFoundException("question is not found");
         }
     }
-
-
-    public void write(String subject, String content, LocalDateTime now) {
-        Question question = new Question(subject,content,now);
-
-        questionRepository.save(question);
+    public void create(String subject, String content){
+        Question question=new Question();
+        question.setSubject(subject);
+        question.setContent(content);
+        question.setCreateDate(LocalDateTime.now());
+        this.questionRepository.save(question);
     }
 }
