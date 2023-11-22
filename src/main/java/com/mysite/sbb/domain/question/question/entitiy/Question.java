@@ -2,15 +2,18 @@ package com.mysite.sbb.domain.question.question.entitiy;
 
 import com.mysite.sbb.domain.answer.answer.entity.Answer;
 import jakarta.persistence.*;
+import lombok.AllArgsConstructor;
 import lombok.Getter;
+import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 import java.time.LocalDateTime;
 import java.util.List;
-
+@Entity
 @Getter
 @Setter
-@Entity
+@AllArgsConstructor
+@NoArgsConstructor
 public class Question {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -26,4 +29,11 @@ public class Question {
 
     @OneToMany(mappedBy = "question", cascade = CascadeType.REMOVE)
     private List<Answer> answerList;
+
+    public Question(String subject, String content, LocalDateTime now){
+        this.subject=subject;
+        this.content=content;
+        this.createDate=now;
+    }
+
 }

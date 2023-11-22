@@ -6,6 +6,7 @@ import com.mysite.sbb.domain.question.question.repository.QuestionRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
+import java.time.LocalDateTime;
 import java.util.List;
 import java.util.Optional;
 
@@ -25,5 +26,12 @@ public class QuestionService {
         }else {
             throw new DataNotFoundException("question is not found");
         }
+    }
+
+
+    public void write(String subject, String content, LocalDateTime now) {
+        Question question = new Question(subject,content,now);
+
+        questionRepository.save(question);
     }
 }
