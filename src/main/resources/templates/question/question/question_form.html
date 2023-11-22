@@ -2,9 +2,7 @@
 <div layout:fragment="content" class="mt-2 mx-3">
     <h2 class="border-b border-base-300 py-2">질문 등록</h2>
     <form th:action="@{/question/create}" th:object="${questionForm}" method="post">
-        <div role="alert" class="alert alert-error" th:if="${#fields.hasAnyErrors()}">
-            <div th:each="err : ${#fields.allErrors()}" th:text="${err}"></div>
-        </div>
+        <div th:replace="~{global/form_errors :: formErrorsFragment}"></div>
         <div class="my-3 px-2 ">
             <label for="subject" class="form-label">제목</label>
             <input type="text" th:field="*{subject}" class="form-control input input-bordered w-full mt-2">
