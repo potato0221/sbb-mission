@@ -19,7 +19,7 @@ public class NotProd {
             QuestionService questionService
     ){
         return args ->  {
-            for (int i = 1; i <= 120; i++) {
+            for (int i = 1; i <= 20; i++) {
                 Question question = new Question();
                 questionService.create(
                         "질문 제목 " + i,

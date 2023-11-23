@@ -25,7 +25,7 @@
         </tbody>
     </table>
     <!-- 페이징처리 시작 -->
-    <div class="join w-full flex justify-center">
+    <div class="join w-full flex justify-center mt-1">
         <a class="join-item btn" th:classappend="${paging.number < 10} ? 'disabled' : ''"
            th:if="${paging.number >= 10}" th:href="@{|?page=${(paging.number/10 > 0) ? (paging.number-10) : 0}|}">
             <span>이전</span>
