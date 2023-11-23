@@ -2,23 +2,47 @@
 <div layout:fragment="content" class="mt-2 mx-2 overflow-x-auto">
     <table class="w-full table table-zebra px-2">
         <thead class="bg-info-content text-base-100">
-            <tr>
-                <th>번호</th>
-                <th>제목</th>
-                <th>작성일시</th>
-            </tr>
+        <tr>
+            <th>번호</th>
+            <th>제목</th>
+            <th>작성일시</th>
+        </tr>
         </thead>
         <tbody>
-        <tr class="bg-base-200" th:each="question, loop : ${questionList}">
+        <tr class="bg-base-200" th:each="question, loop : ${paging}">
             <td class="border border-white px-4 py-2" th:text="${loop.count}"></td>
             <td class="border border-white px-4 py-2">
                 <a class="text-primary-500" th:href="@{|/question/detail/${question.id}|}"
                    th:text="${question.subject}"></a>
             </td>
-            <td class="border border-white px-4 py-2" th:text="${#temporals.format(question.createDate, 'yyyy-MM-dd HH:mm')}"></td>
+            <td class="border border-white px-4 py-2"
+                th:text="${#temporals.format(question.createDate, 'yyyy-MM-dd HH:mm')}"></td>
         </tr>
         </tbody>
     </table>
+    <!-- 페이징처리 시작 -->
+    <div class="join w-full flex justify-center">
+        <a class="join-item btn" th:classappend="${paging.number < 10} ? 'disabled' : ''"
+           th:if="${paging.number >= 10}" th:href="@{|?page=${(paging.number/10 > 0) ? (paging.number-10) : 0}|}">
+            <span>이전</span>
+        </a>
+
+        <span th:each="page: ${#numbers.sequence(0, paging.totalPages-1)}"
+              th:if="${page >= (paging.number/10)*10 and page < ((paging.number/10)+1)*10}">
+        <a th:if="${page == paging.number}"
+           th:class="${'join-item btn btn-active'}"
+           th:text="${page + 1}"></a>
+        <a th:unless="${page == paging.number}"
+           th:class="${'join-item btn'}"
+           th:text="${page + 1}" th:href="@{|?page=${page}|}"></a>
+    </span>
+
+        <a class="join-item btn" th:classappend="${paging.number + 10 >= paging.totalPages} ? 'disabled' : ''"
+           th:if="${paging.number + 10 < paging.totalPages}" th:href="@{|?page=${(paging.number/10 + 1) * 10}|}">
+            <span>다음</span>
+        </a>
+    </div>
+    <!-- 페이징처리 끝 -->
     <div class="mt-2 flex gap-2 flex justify-end">
         <a th:href="@{/question/create}" class="btn btn-outline mr-3">질문 등록하기</a>
     </div>

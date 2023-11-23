@@ -12,20 +12,20 @@ import org.springframework.context.annotation.Configuration;
 public class NotProd {
     @Autowired
     private QuestionRepository questionRepository;
+
+//    페이징을 위해 대량 테스트 데이터 추가
     @Bean
     public ApplicationRunner initNotProd(
             QuestionService questionService
     ){
         return args ->  {
-            Question question2=new Question();
-            questionService.create(
-                    "sbb에 대해 알고싶습니다.",
-                    "sbb에 대해 알려주세요"
-            );
-            questionService.create(
-                    "안녕하세요 질문 있습니다.",
-                    "sbb의 좋은점을 알려주세요."
-            );
+            for (int i = 1; i <= 20; i++) {
+                Question question = new Question();
+                questionService.create(
+                        "질문 제목 " + i,
+                        "질문 내용 " + i
+                );
+            }
         };
     }
 
