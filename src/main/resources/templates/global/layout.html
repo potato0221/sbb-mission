@@ -28,13 +28,15 @@
 <link href="https://cdn.jsdelivr.net/npm/daisyui@4.0.8/dist/full.min.css" rel="stylesheet" type="text/css"/>
 <script src="https://cdn.tailwindcss.com"></script>
 
-<script>
-    const queryParams = getQueryParams();
-
-    if (queryParams.msg) {
-        toastNotice(queryParams.msg);
-    }
-</script>
+<!--navbar-->
+<div class="navbar bg-base-100">
+    <div class="flex-none">
+        <a href="/" class="btn btn-ghost text-xl">SBB</a>
+    </div>
+    <div class="flex-1">
+        <a class="btn btn-ghost text-xl">로그인</a>
+    </div>
+</div>
 
 <th:block layout:fragment="content"></th:block>
 
