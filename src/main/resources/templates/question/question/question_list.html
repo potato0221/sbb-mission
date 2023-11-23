@@ -10,7 +10,7 @@
         </thead>
         <tbody>
         <tr class="bg-base-200" th:each="question, loop : ${paging}">
-            <td class="border border-white px-4 py-2" th:text="${loop.count}"></td>
+            <td th:text="${paging.getTotalElements - (paging.number * paging.size) - loop.index}"></td>
             <td class="border border-white px-4 py-2">
                 <a class="text-primary-500" th:href="@{|/question/detail/${question.id}|}"
                    th:text="${question.subject}"></a>
