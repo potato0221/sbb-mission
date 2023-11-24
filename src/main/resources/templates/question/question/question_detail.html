@@ -32,10 +32,11 @@
     <form th:action="@{|/answer/create/${question.id}|}" th:object="${answerForm}" method="post" class="my-3">
         <div th:replace="~{global/form_errors :: formErrorsFragment}"></div>
         <div class="flex justify-between items-center">
-            <textarea name="content" id="content" rows="5" class="form-textarea focus:outline-gray-400 mx-3 w-full"></textarea>
+            <textarea name="content" id="content" rows="5"
+                      class="form-textarea focus:outline-gray-400 mx-3 w-full"></textarea>
         </div>
         <div class="mt-2 flex gap-2 flex justify-end">
-        <input type="submit" value="답변등록" class="btn btn-outline btn-primary mr-3">
+            <input type="submit" value="답변등록" class="btn btn-outline btn-primary mr-3">
         </div>
     </form>
 </div>

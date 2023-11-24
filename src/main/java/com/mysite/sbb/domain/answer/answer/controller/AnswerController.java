@@ -1,7 +1,7 @@
 package com.mysite.sbb.domain.answer.answer.controller;
 
+import com.mysite.sbb.domain.answer.answer.dto.AnswerForm;
 import com.mysite.sbb.domain.answer.answer.service.AnswerService;
-import com.mysite.sbb.domain.models.dto.AnswerForm;
 import com.mysite.sbb.domain.question.question.entitiy.Question;
 import com.mysite.sbb.domain.question.question.service.QuestionService;
 import jakarta.validation.Valid;

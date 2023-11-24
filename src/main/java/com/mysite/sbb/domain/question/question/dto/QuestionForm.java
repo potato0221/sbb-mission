@@ -1,4 +1,4 @@
-package com.mysite.sbb.domain.models.dto;
+package com.mysite.sbb.domain.question.question.dto;
 
 import jakarta.validation.constraints.NotEmpty;
 import jakarta.validation.constraints.Size;
