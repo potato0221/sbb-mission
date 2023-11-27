@@ -34,6 +34,8 @@ public class Question {
     @ManyToOne
     private SiteUser author;
 
+    private LocalDateTime modifyDate;
+
     public Question(String subject, String content, LocalDateTime now){
         this.subject=subject;
         this.content=content;
