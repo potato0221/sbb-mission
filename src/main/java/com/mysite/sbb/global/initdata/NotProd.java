@@ -26,7 +26,8 @@ public class NotProd {
                 Question question = new Question();
                 questionService.create(
                         "질문 제목 " + i,
-                        "질문 내용 " + i
+                        "질문 내용 " + i,
+                        null
                 );
             }
             for (int i=1;i<=3;i++){

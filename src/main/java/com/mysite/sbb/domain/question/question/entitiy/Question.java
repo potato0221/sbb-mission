@@ -1,6 +1,7 @@
 package com.mysite.sbb.domain.question.question.entitiy;
 
 import com.mysite.sbb.domain.answer.answer.entity.Answer;
+import com.mysite.sbb.domain.user.user.entitiy.SiteUser;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
@@ -29,6 +30,9 @@ public class Question {
 
     @OneToMany(mappedBy = "question", cascade = CascadeType.REMOVE)
     private List<Answer> answerList;
+
+    @ManyToOne
+    private SiteUser author;
 
     public Question(String subject, String content, LocalDateTime now){
         this.subject=subject;
