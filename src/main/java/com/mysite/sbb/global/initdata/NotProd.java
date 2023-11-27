@@ -22,18 +22,18 @@ public class NotProd {
             UserService userService
     ){
         return args ->  {
+            SiteUser siteUser=new SiteUser();
+            siteUser = userService.create("user1","www@email.com","1234");
+
             for (int i = 1; i <= 60; i++) {
                 Question question = new Question();
                 questionService.create(
                         "질문 제목 " + i,
                         "질문 내용 " + i,
-                        null
+                        siteUser
                 );
             }
-            for (int i=1;i<=3;i++){
-                SiteUser siteUser=new SiteUser();
-                userService.create("user"+i,"www@email.com"+i,"12345" );
-            }
+
         };
     }
 

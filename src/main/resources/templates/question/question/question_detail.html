@@ -6,9 +6,14 @@
         <div class="card-body">
             <div class="card-text whitespace-pre-line" th:text="${question.content}"></div>
             <div class="flex justify-end">
-                <div class="badge badge-ghost dark:text-gray-300 p-2 text-start">
+            <div class="flex justify-end badge badge-ghost dark:text-gray-300 p-2 text-start ">
+                <div class="mr-2">
+                    <span th:if="${question.author != null}" th:text="${question.author.username}"></span>
+                </div>
+                <div>
                     <div th:text="${#temporals.format(question.createDate, 'yyyy-MM-dd HH:mm')}"></div>
                 </div>
+            </div>
             </div>
         </div>
     </div>
@@ -20,9 +25,14 @@
         <div class="card-body">
             <div class="card-text whitespace-pre-line" th:text="${answer.content}"></div>
             <div class="flex justify-end">
-                <div class="badge badge-ghost dark:text-gray-300 p-2 text-start">
+            <div class="badge badge-ghost dark:text-gray-300 p-2">
+                <div class="mr-2">
+                    <span th:if="${answer.author != null}" th:text="${answer.author.username}"></span>
+                </div>
+                <div>
                     <div th:text="${#temporals.format(answer.createDate, 'yyyy-MM-dd HH:mm')}"></div>
                 </div>
+            </div>
             </div>
         </div>
     </div>
@@ -32,8 +42,15 @@
     <form th:action="@{|/answer/create/${question.id}|}" th:object="${answerForm}" method="post" class="my-3">
         <div th:replace="~{global/form_errors :: formErrorsFragment}"></div>
         <div class="flex justify-between items-center">
-            <textarea th:field="*{content}" id="content" rows="5"
+            <textarea th:field="*{content}" rows="5"
                       class="form-textarea focus:outline-gray-400 mx-3 w-full"></textarea>
+
+<!--            <textarea sec:authorize="isAnonymous()" disabled th:field="*{content}" rows="1"-->
+<!--                      class="form-textarea focus:outline-gray-400 mx-3 w-full"></textarea>-->
+<!--            <textarea sec:authorize="isAuthenticated()" disabled th:field="*{content}" rows="5"-->
+<!--                      class="form-textarea focus:outline-gray-400 mx-3 w-full"></textarea>-->
+
+
         </div>
         <div class="mt-2 flex gap-2 flex justify-end">
             <input type="submit" value="답변등록" class="btn btn-outline btn-primary mr-3">
