@@ -15,22 +15,25 @@ public class NotProd {
     @Autowired
     private QuestionRepository questionRepository;
 
-//    페이징을 위해 대량 테스트 데이터 추가
+    //    페이징을 위해 대량 테스트 데이터 추가
     @Bean
     public ApplicationRunner initNotProd(
             QuestionService questionService,
             UserService userService
-    ){
-        return args ->  {
-            SiteUser siteUser=new SiteUser();
-            siteUser = userService.create("user1","www@email.com","1234");
+    ) {
+        return args -> {
+            SiteUser siteUser1 = new SiteUser();
+            SiteUser siteUser2 = new SiteUser();
+            siteUser1 = userService.create("user1", "www1@email.com", "1234");
+            siteUser2 = userService.create("user2", "www2@email.com", "1234");
+
 
             for (int i = 1; i <= 60; i++) {
                 Question question = new Question();
                 questionService.create(
                         "질문 제목 " + i,
                         "질문 내용 " + i,
-                        siteUser
+                        siteUser1
                 );
             }
 
