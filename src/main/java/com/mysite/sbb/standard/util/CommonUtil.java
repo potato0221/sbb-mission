@@ -1,4 +1,4 @@
-package com.mysite.sbb.global.util;
+package com.mysite.sbb.standard.util;
 
 import org.commonmark.node.Node;
 import org.commonmark.parser.Parser;
