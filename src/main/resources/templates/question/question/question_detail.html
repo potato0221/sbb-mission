@@ -7,8 +7,8 @@
             <div class="card-text whitespace-pre-line" th:text="${question.content}"></div>
             <div class="flex justify-end">
                 <div th:if="${question.modifyDate != null}" class="flex justify-end badge badge-ghost dark:text-gray-300 p-2 text-start">
-                    <span class="mr-2">modified at</span>
-                    <span th:text="${#temporals.format(question.modifyDate, 'yyyy-MM-dd HH:mm')}"></span>
+                    <div class="mr-2">modified at</div>
+                    <div th:text="${#temporals.format(question.modifyDate, 'yyyy-MM-dd HH:mm')}"></div>
                 </div>
             </div>
             <div class="flex justify-end">
