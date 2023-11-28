@@ -49,6 +49,7 @@
     <!-- 답변 반복 시작 -->
     <div class="card w-96 bg-base-100 border border-base-300 mt-3 w-full px-2"
          th:each="answer : ${question.answerList}">
+        <a th:id="|answer_${answer.id}|"></a>
         <div class="card-body">
             <div class="card-text whitespace-pre-line" th:text="${answer.content}"></div>
             <div class="flex justify-end">
