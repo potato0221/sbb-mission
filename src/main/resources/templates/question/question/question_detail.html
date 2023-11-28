@@ -4,7 +4,7 @@
     <h2 class="border-b border-base-300 py-2" th:text="${question.subject}"></h2>
     <div class="card w-96 bg-base-100 border border-base-300 mt-3 w-full px-2">
         <div class="card-body">
-            <div class="card-text whitespace-pre-line" th:text="${question.content}"></div>
+            <p class="card-text" th:utext="${@commonUtil.markdown(question.content)}"></p>
             <div class="flex justify-end">
                 <div th:if="${question.modifyDate != null}"
                      class="flex justify-end badge badge-ghost dark:text-gray-300 p-2 text-start">
@@ -51,7 +51,7 @@
          th:each="answer : ${question.answerList}">
         <a th:id="|answer_${answer.id}|"></a>
         <div class="card-body">
-            <div class="card-text whitespace-pre-line" th:text="${answer.content}"></div>
+            <p th:utext="${@commonUtil.markdown(answer.content)}"></p>
             <div class="flex justify-end">
                 <div th:if="${answer.modifyDate != null}" class="badge badge-ghost dark:text-gray-300 p-2">
                     <div class="mr-2">modified at</div>
