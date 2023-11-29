@@ -4,96 +4,96 @@
     <h2 class="bg-blue-600 text-white px-4 py-3 mb-2" th:text="${question.subject}"></h2>
 
     <div class="mx-3">
-    <div class="card w-96 bg-base-100 border border-base-300 mt-3 w-full px-2">
-        <div class="card-body">
-            <p class="card-text" th:utext="${@commonUtil.markdown(question.content)}"></p>
-            <div class="flex justify-end">
-                <div th:if="${question.modifyDate != null}"
-                     class="flex justify-end badge badge-ghost dark:text-gray-300 p-2 text-start">
-                    <div class="mr-2">modified at</div>
-                    <div th:text="${#temporals.format(question.modifyDate, 'yyyy-MM-dd HH:mm')}"></div>
+        <div class="card w-96 bg-base-100 border border-base-300 mt-3 w-full px-2">
+            <div class="card-body">
+                <p class="card-text" th:utext="${@commonUtil.markdown(question.content)}"></p>
+                <div class="flex justify-end">
+                    <div th:if="${question.modifyDate != null}"
+                         class="flex justify-end badge badge-ghost dark:text-gray-300 p-2 text-start">
+                        <div class="mr-2">modified at</div>
+                        <div th:text="${#temporals.format(question.modifyDate, 'yyyy-MM-dd HH:mm')}"></div>
+                    </div>
                 </div>
-            </div>
-            <div class="flex justify-end">
-                <div class="flex justify-end badge badge-ghost dark:text-gray-300 p-2 text-start">
-                    <div class="mr-2">
-                        <span th:if="${question.author != null}" th:text="${question.author.username}"></span>
+                <div class="flex justify-end">
+                    <div class="flex justify-end badge badge-ghost dark:text-gray-300 p-2 text-start">
+                        <div class="mr-2">
+                            <span th:if="${question.author != null}" th:text="${question.author.username}"></span>
+                        </div>
+                        <div>
+                            <div th:text="${#temporals.format(question.createDate, 'yyyy-MM-dd HH:mm')}"></div>
+                        </div>
+                    </div>
+                </div>
+                <div class="my-3 flex justify-between">
+                    <div>
+                        <a href="javascript:void(0);" class="recommend btn btn-sm btn-ghost"
+                           th:data-uri="@{|/question/vote/${question.id}|}">
+                            추천
+                            <span class="badge rounded-pill bg-success" th:text="${#lists.size(question.voter)}"></span>
+                        </a>
                     </div>
                     <div>
-                        <div th:text="${#temporals.format(question.createDate, 'yyyy-MM-dd HH:mm')}"></div>
+                        <a th:href="@{|/question/modify/${question.id}|}" class="btn btn-outline btn-sm mr-3"
+                           sec:authorize="isAuthenticated()"
+                           th:if="${question.author != null and #authentication.getPrincipal().getUsername() == question.author.username}"
+                           th:text="수정"></a>
+                        <a href="javascript:void(0);" th:data-uri="@{|/question/delete/${question.id}|}"
+                           class="delete btn btn-outline btn-sm" sec:authorize="isAuthenticated()"
+                           th:if="${question.author != null and #authentication.getPrincipal().getUsername() == question.author.username}"
+                           th:text="삭제"></a>
                     </div>
                 </div>
-            </div>
-            <div class="my-3 flex justify-between">
-                <div>
-                    <a href="javascript:void(0);" class="recommend btn btn-sm btn-ghost"
-                       th:data-uri="@{|/question/vote/${question.id}|}">
-                        추천
-                        <span class="badge rounded-pill bg-success" th:text="${#lists.size(question.voter)}"></span>
-                    </a>
-                </div>
-                <div>
-                    <a th:href="@{|/question/modify/${question.id}|}" class="btn btn-outline btn-sm mr-3"
-                       sec:authorize="isAuthenticated()"
-                       th:if="${question.author != null and #authentication.getPrincipal().getUsername() == question.author.username}"
-                       th:text="수정"></a>
-                    <a href="javascript:void(0);" th:data-uri="@{|/question/delete/${question.id}|}"
-                       class="delete btn btn-outline btn-sm" sec:authorize="isAuthenticated()"
-                       th:if="${question.author != null and #authentication.getPrincipal().getUsername() == question.author.username}"
-                       th:text="삭제"></a>
-                </div>
-            </div>
 
+            </div>
         </div>
-    </div>
     </div>
     <!-- 답변의 갯수 표시 -->
     <h5 class="bg-blue-800 text-white px-4 py-3 my-2" th:text="|${#lists.size(question.answerList)}개의 답변이 있습니다.|"></h5>
     <!-- 답변 반복 시작 -->
     <div class="mx-3">
-    <div class="card w-96 bg-base-100 border border-base-300 mt-3 w-full px-2"
-         th:each="answer : ${question.answerList}">
-        <a th:id="|answer_${answer.id}|"></a>
-        <div class="card-body">
-            <p th:utext="${@commonUtil.markdown(answer.content)}"></p>
-            <div class="flex justify-end">
-                <div th:if="${answer.modifyDate != null}" class="badge badge-ghost dark:text-gray-300 p-2">
-                    <div class="mr-2">modified at</div>
-                    <div th:text="${#temporals.format(answer.modifyDate, 'yyyy-MM-dd HH:mm')}"></div>
+        <div class="card w-96 bg-base-100 border border-base-300 mt-3 w-full px-2"
+             th:each="answer : ${question.answerList}">
+            <a th:id="|answer_${answer.id}|"></a>
+            <div class="card-body">
+                <p th:utext="${@commonUtil.markdown(answer.content)}"></p>
+                <div class="flex justify-end">
+                    <div th:if="${answer.modifyDate != null}" class="badge badge-ghost dark:text-gray-300 p-2">
+                        <div class="mr-2">modified at</div>
+                        <div th:text="${#temporals.format(answer.modifyDate, 'yyyy-MM-dd HH:mm')}"></div>
+                    </div>
                 </div>
-            </div>
-            <div class=" flex justify-end">
-                <div class="badge badge-ghost dark:text-gray-300 p-2">
-                    <div class="mr-2">
-                        <span th:if="${answer.author != null}" th:text="${answer.author.username}"></span>
+                <div class=" flex justify-end">
+                    <div class="badge badge-ghost dark:text-gray-300 p-2">
+                        <div class="mr-2">
+                            <span th:if="${answer.author != null}" th:text="${answer.author.username}"></span>
+                        </div>
+                        <div>
+                            <div th:text="${#temporals.format(answer.createDate, 'yyyy-MM-dd HH:mm')}"></div>
+                        </div>
+                    </div>
+                </div>
+                <div class="my-3 flex justify-between">
+                    <div>
+                        <a href="javascript:void(0);" class="recommend btn btn-sm btn-ghost"
+                           th:data-uri="@{|/answer/vote/${answer.id}|}">
+                            추천
+                            <span class="badge rounded-pill bg-success" th:text="${#lists.size(answer.voter)}"></span>
+                        </a>
                     </div>
                     <div>
-                        <div th:text="${#temporals.format(answer.createDate, 'yyyy-MM-dd HH:mm')}"></div>
+                        <a th:href="@{|/answer/modify/${answer.id}|}" class="btn btn-outline btn-sm mr-3"
+                           sec:authorize="isAuthenticated()"
+                           th:if="${answer.author != null and #authentication.getPrincipal().getUsername() == answer.author.username}"
+                           th:text="수정"></a>
+                        <a href="javascript:void(0);" th:data-uri="@{|/answer/delete/${answer.id}|}"
+                           class="delete btn btn-outline btn-sm" sec:authorize="isAuthenticated()"
+                           th:if="${answer.author != null and #authentication.getPrincipal().getUsername() == answer.author.username}"
+                           th:text="삭제"></a>
                     </div>
                 </div>
-            </div>
-            <div class="my-3 flex justify-between">
-                <div>
-                <a href="javascript:void(0);" class="recommend btn btn-sm btn-ghost"
-                   th:data-uri="@{|/answer/vote/${answer.id}|}">
-                    추천
-                    <span class="badge rounded-pill bg-success" th:text="${#lists.size(answer.voter)}"></span>
-                </a>
-                </div>
-                <div>
-                <a th:href="@{|/answer/modify/${answer.id}|}" class="btn btn-outline btn-sm mr-3"
-                   sec:authorize="isAuthenticated()"
-                   th:if="${answer.author != null and #authentication.getPrincipal().getUsername() == answer.author.username}"
-                   th:text="수정"></a>
-                <a href="javascript:void(0);" th:data-uri="@{|/answer/delete/${answer.id}|}"
-                   class="delete btn btn-outline btn-sm" sec:authorize="isAuthenticated()"
-                   th:if="${answer.author != null and #authentication.getPrincipal().getUsername() == answer.author.username}"
-                   th:text="삭제"></a>
-                </div>
-            </div>
 
+            </div>
         </div>
-    </div>
     </div>
     <!-- 답변 반복 끝  -->
     <!-- 답변 작성 -->
@@ -122,7 +122,6 @@
             if (confirm("정말로 삭제하시겠습니까?")) {
                 location.href = this.dataset.uri;
             }
-            ;
         });
     });
 
@@ -131,7 +130,7 @@
         element.addEventListener('click', function () {
             if (confirm("정말로 추천 하시겠습니까?")) {
                 location.href = this.dataset.uri;
-            };
+            }
         });
     });
 </script>
