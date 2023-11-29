@@ -1,4 +1,4 @@
-package com.mysite.sbb.domain.user.user.service;
+package com.mysite.sbb.domain.user.userSecurity.service;
 
 import com.mysite.sbb.domain.user.user.entitiy.SiteUser;
 import com.mysite.sbb.domain.user.user.repository.UserRepository;
